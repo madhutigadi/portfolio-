@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Profile & Resume</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f9;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .profile {
+      text-align: center;
+    }
+
+    .profile img {
+      width: 150px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin: 10px 0;
+      color: #007bff;
+    }
+
+    h2 {
+      margin: 5px 0;
+      color: #333;
+    }
+
+    p {
+      color: #555;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .resume h2 {
+      border-bottom: 2px solid #007bff;
+      padding-bottom: 5px;
+      margin-top: 25px;
+      text-align: left;
+    }
+
+    .resume ul {
+      list-style: none;
+      padding: 0;
+      text-align: left;
+    }
+
+    .resume li {
+      margin: 6px 0;
+    }
+
+    .resume p {
+      text-align: left;
+    }
+
+    /* Prevent awkward page breaks in PDF */
+    .resume h2, .resume ul, .resume p {
+      page-break-inside: avoid;
+    }
+  </style>
+</head>
+<body>
+  <!-- Profile Page -->
+  <div id="profilePage" class="container profile">
+    <img src="madhu1.jpeg" alt="My Photo">
+    <h1>Madhu Tigadi</h1>
+    <h2>Maratha Mandala Engineering College Belagavi</h2>
+    <p><strong>Department:</strong> Computer Science and Engineering</p>
+    <p><strong>Semester:</strong> 5th semester</p>
+    <p>Computer Science student passionate about web development and design.</p>
+
+    <button onclick="showResume()">My Resume</button>
+  </div>
+
+  <!-- Resume Page (hidden initially) -->
+  <div id="resumePage" class="container resume" style="display:none;">
+    <h1>Resume</h1>
+     <h2>Madhu Rudragouda Tigadi</h2>
+    <p><strong>Email:</strong> madhutigadi2005@gmail.com</p>
+    <p><strong>Phone:</strong> 9019493155</p>
+
+    <h2>Education</h2>
+    <ul>
+      <li>Computer Science and Engineering in Maratha Mandala Engineering College Belagavi (2023–2027)</li>
+      <li>Government RGS PU College Kittur – 83.16% (2023)</li>
+      <li>Government High School Veerapur – 98.4% (2021)</li>
+    </ul>
+
+    <h2>Skills</h2>
+    <ul>
+      <li>Basic Python</li>
+      <li>Basic Java</li>
+      <li>HTML, CSS, JS</li>
+    </ul>
+
+    <h2>Languages</h2>
+    <ul>
+      <li>Kannada</li>
+      <li>English</li>
+      <li>Hindi</li>
+    </ul>
+
+    <h2>Strengths</h2>
+    <ul>
+      <li>Good communication</li>
+      <li>Fast learner</li>
+      <li>Team management</li>
+    </ul>
+
+    <h2>Projects</h2>
+    <ul>
+      <li><strong>Portfolio Website:</strong> Personal site showcasing my work.</li>
+      <li><strong>Study Resource Hub:</strong> Built with Python (Flask), MySQL, HTML, JS, CSS</li>
+    </ul>
+
+    <h2>Experience</h2>
+    <ul>
+      <li>Fresher</li>
+    </ul>
+
+    <!-- Action Buttons -->
+    <button onclick="showProfile()">⬅ Back to Profile</button>
+    <button onclick="downloadResume()">⬇ Download Resume</button>
+  </div>
+
+  <!-- Load html2pdf.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <script>
+    function showResume() {
+      document.getElementById("profilePage").style.display = "none";
+      document.getElementById("resumePage").style.display = "block";
+    }
+
+    function showProfile() {
+      document.getElementById("resumePage").style.display = "none";
+      document.getElementById("profilePage").style.display = "block";
+    }
+
+    function downloadResume() {
+      const element = document.getElementById("resumePage");
+
+      const opt = {
+        margin:       [0.3, 0.3, 0.3, 0.3], // top, left, bottom, right margins
+        filename:     'Madhu_Tigadi_Resume.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, scrollY: 0 },
+        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' },
+        pagebreak:    { mode: ['avoid'] }
+      };
+
+      html2pdf().set(opt).from(element).save();
+    }
+  </script>
+</body>
+</html>
